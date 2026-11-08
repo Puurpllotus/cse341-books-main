@@ -1,17 +1,58 @@
 import { getDb } from '../db/connect.js';
 
 const getAllBooks = async () => {
-  const books = await getDb().collection('books').find({}).toArray();
+  const database = getDb();
+  const collection = database.collection('books');
+  const books = await collection.find({}).toArray();
 
   return books;
 };
 
 const getBookById = async (bookId) => {
-  const book = await getDb()
-    .collection('books')
-    .findOne({ id: bookId });
+  const database = getDb();
+  const collection = database.collection('books');
+  const book = await collection.findOne({ id: bookId });
 
   return book;
 };
 
-export { getAllBooks, getBookById };
+const createBook = async (book) => {
+  const database = getDb();
+  const collection = database.collection('books');
+  const result = await collection.insertOne(book);
+
+  return result;
+};
+
+const updateBook = async (bookId, book) => {
+  const database = getDb();
+  const collection = database.collection('books');
+  const result = await collection.replaceOne({ id: bookId }, book);
+
+  return result;
+};
+
+const deleteBook = async (bookId) => {
+  const database = getDb();
+  const collection = database.collection('books');
+  const result = await collection.deleteOne({ id: bookId });
+
+  return result;
+};
+
+const authorExists = async (authorId) => {
+  const database = getDb();
+  const collection = database.collection('authors');
+  const author = await collection.findOne({ id: authorId });
+
+  return Boolean(author);
+};
+
+export {
+  getAllBooks,
+  getBookById,
+  createBook,
+  updateBook,
+  deleteBook,
+  authorExists,
+};
