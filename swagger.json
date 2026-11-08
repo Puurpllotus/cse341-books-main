@@ -1,0 +1,64 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Books API",
+    "version": "1.0.0",
+    "description": "API documentation for the CSE 341 Books project"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Development server"
+    }
+  ],
+  "paths": {
+    "/books": {
+      "get": {
+        "summary": "Get all books",
+        "tags": [
+          "Books"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved all books."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "summary": "Get a book by ID",
+        "tags": [
+          "Books"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The unique ID of the book."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the requested book."
+          },
+          "404": {
+            "description": "Book not found."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    }
+  },
+  "components": {},
+  "tags": []
+}
