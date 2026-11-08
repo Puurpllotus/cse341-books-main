@@ -15,12 +15,16 @@ const options = {
       version: '1.0.0',
       description: 'API documentation for the CSE 341 Books project',
     },
-    servers: [
-      {
-        url: 'http://localhost:3000',
-        description: 'Development server',
-      },
-    ],
+   servers: [
+  {
+    url: 'http://localhost:3000',
+    description: 'Development server',
+  },
+  {
+    url: 'https://cse341-books-api-gpd2.onrender.com',
+    description: 'Production server',
+  },
+],
   },
   apis: [
     path.join(directory, 'src', 'router.js'),
